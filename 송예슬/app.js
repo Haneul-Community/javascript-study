@@ -1,37 +1,27 @@
-const person = {
-    firstName : 'Song',
-    lastName : 'Yeseul',
-    age : 22,
-    email : 'chonsa0409@naver.com',
-    hobbies : ['drawing', 'pictures'],
-    address: {
-        city : 'Incheon',
-        country : 'Korea'
-    },
-    getBrithYear: function(){
-        return 2000;
-    }
-}
-
 let val;
 
-val = person;
-// Get specific value
-val = person.firstName;
-val = person['lastName'];
-val = person.age;
-val = person.hobbies[1];
-val = person.address.country;
-val = person.getBrithYear();
+const today = new Date();
 
-console.log(val);
+// Date 설정
+let birthday = new Date('4-9-2000 12:30:00');
+birthday = new Date ('April 9 2000');
+birthday = new Date ('4/9/2000');
 
-const people = [
-    {name : 'DDU', age: 24},
-    {name : 'Seul', age : 22},
-    {name : 'Hell', age: 999}
-];
+// Date 일부만 가져오기
+val = today.getMonth(); // Month는 0부터 시작.
+val = today.getDate();
+val = today.getDay(); // 요일. 0=월?
+val = today.getMinutes();
+val = today.getSeconds();
+val = today.getMilliseconds();
+val = today.getTime();
 
-for(let i = 0; i < people.length; i++){
-    console.log(people[i].name);
-}
+// 설정한 date 변경
+birthday.setMonth(2);
+birthday.setDate(12);
+birthday.setFullYear(1989);
+birthday.setHours(3);
+birthday.setMinutes(30);
+birthday.setSeconds(10);
+
+console.log(birthday);
