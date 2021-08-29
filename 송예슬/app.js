@@ -1,51 +1,57 @@
-// FUNCTION DECLARATIONS ---------------------------------
+// WINDOW METHODS / OBJECTS / PROPERTIES
 
-function greet (firstName = 'Song', lastName = 'YeSeul'){
-//    console.log('Hello'); // 함수만 호출하면 입력됨
-    return 'Hello' + firstName + ' ' + lastName;
-}
-// return하는 함수는 console.log으로 감싸줘야함.
-// default로 매개변수 지정 가능. 
+// Alert : 창에 메세지로 뜸
+// alert('Hello world');
 
- console.log(greet())
+// Prompt : 메세지 창으로 입력을 받음. 
+// const input = prompt();
+// alert(input);
 
-// FUNCTION EXPRESSIONS -----------------------------------
+// Confirm : 메세지 창으로 확인/취소 응답을 받음
+//  if(confirm('Are you sure')){
+//     console.log('Yes');
+// } else {
+//     console.log('NO');
+// }
 
-const square = function (x=3) {
-    return x*x;
-};
+let val;
 
-console.log(square());
+// Outter height and width
+val = window.outerHeight;
+val = window.outerWidth;
 
-// IMEDIATELY INVOKABLE FUNCTION EXPRESSIONS - IIFEs ------
-// 정의하는 순간 실행되는 함수. 
+// Inner height and width
+val = window.innerHeight;
+val = window.innerWidth;
 
-(function(){
-    console.log('IIFE Ran..');
-})();
+// Scroll points
+val = window.scrollY;
+val = window.scrollX;
 
-(function(name){
-    console.log('Hello ' + name);
-})('Suel');
+// Location Object
+val = window.location;
+val = window.location.hostname;
+val = window.location.port;
+val = window.location.href;
+val = window.location.search;
 
-// PROPERTY METHODS ------------------------------------------
-// object안에 function이 있을 때 : method
+//Redirect : 해당 페이지로 이동
+//window.location.href = 'http://google.com';
+// Reload 
+//window.location.reload();
 
-// define inside object
-const todo = {
-    add : function(){
-        console.log('Add todo...');
-    },
-    edit : function(id){
-        console.log(`Edit todo ${id}` );
-    }
-}
+// History Object
 
-// define outside.
-todo.delete = function(){
-    console.log('Delete todo...');
-}
+// window.history.go(-2);
+// val = window.history.length;
 
-todo.add();
-todo.edit(22);
-todo.delete();
+// Navigator Object
+val = window.navigator;
+val = window.navigator.appName;
+val = window.navigator.appVersion;
+val = window.navigator.userAgent;
+val = window.navigator.platform;
+val = window.navigator.vendor;
+val = window.navigator.language;
+
+console.log(val);
