@@ -381,28 +381,108 @@ taskInput.value = '';
 
 // EVENT BUBBLING : 직접적으로 해당되는걸 클릭하지 않았는데도 발생. 
 
-document.querySelector('.card-title').addEventListener('click', function(){
-    console.log('card title');
-});
+// document.querySelector('.card-title').addEventListener('click', function(){
+//     console.log('card title');
+// });
 
-document.querySelector('.card-content').addEventListener('click', function(){
-    console.log('card content');
-});
+// document.querySelector('.card-content').addEventListener('click', function(){
+//     console.log('card content');
+// });
 
-document.querySelector('.card').addEventListener('click', function(){
-    console.log('card');
-});
+// document.querySelector('.card').addEventListener('click', function(){
+//     console.log('card');
+// });
 
-document.querySelector('.col').addEventListener('click', function(){
-    console.log('col');
-});
+// document.querySelector('.col').addEventListener('click', function(){
+//     console.log('col');
+// });
 
 // EVNET DELGATION
 
-const delItem = document.querySelector('.delete-item');
+// const delItem = document.querySelector('.delete-item');
+// delItem.addEventListener('click', deleteItem);
+// function deleteItem(){
+//     console.log('delete item');
+// }
+// 위의 경우에는 첫번째꺼만 됨. 
 
-delItem.addEventListener('click', deleteItem);
+document.body.addEventListener('click', deleteItem);
 
-function deleteItem(){
-    console.log('delete item');
-}
+// function deleteItem(e){
+//     if (e.target.parentElement.className === 'delete-item secondary-content'){
+//         console.log('delete item');
+//     }
+// }
+//  위의 경우에는 모두 다 됨. but className이 완전히 일치해야만 작동. 
+
+function deleteItem(e){
+         if (e.target.parentElement.classList.contains('delete-item')){
+             console.log('delete item');
+             e.target.parentElement.parentElement.remove(); // 실제로 UI에서 지워짐. 
+         }
+     }
+
+// 이 경우는 저 말만 포함이 되기만 하면 작동. => to target 하기 가장 좋은 방법.
+
+// 3-33 'Local & Session Storage ===========================================
+
+// 저장한 것들을 JSON String Afie로 바꿔야함. 그리고 꺼내 쓸때는 Jason method를 거쳐야.
+// store local storage on set item & store key name and a value
+
+// set local storage item
+// localStorage.setItem('name', 'John');
+// localStorage.setItem('age', '20');
+// browser을 껏다 켜도 저장되있음
+
+// set session storage item 
+// sessionStorage.setItem('name','Beth');
+// browser을 껏다키면 reset됨. <-> local. 
+
+// remove from storage
+//localStorage.removeItem('name');
+
+// get from storage
+// const name = localStorage.getItem('name');
+// const age = localStorage.getItem('age');
+
+// clear local storage all
+// localStorage.clear();
+
+// console.log(name, age);
+
+
+// document.querySelector('form').addEventListener('submit', function(e){
+//     const task = document.getElementById('task').value;
+//     localStorage.setItem('task', task);
+//     alert('Task saved');
+
+//     e.preventDefault();
+// })
+
+// 위 경우, 하나의 값만 저장함. 다른 값을 저장하면 replace됨. ->sol) array로 만든후 string으로 저장.
+
+document.querySelector('form').addEventListener('submit', function(e){
+    const task = document.getElementById('task').value;
+
+    let tasks;
+
+    if(localStorage.getItem('tasks') === null ){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks')); 
+        // '.' str이 될 것이므로, JSON이나 우리가 쓸수있는 object로 바꿔야함.
+    }
+
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // string으로 보내져야 하므로.
+    alert('Task saved');
+
+    e.preventDefault(); 
+});
+
+const tasks = JSON.parse(localStorage.getItem('tasks'));
+
+tasks.forEach(function(task){
+    console.log(task);
+});
