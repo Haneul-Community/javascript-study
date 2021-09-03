@@ -62,69 +62,136 @@
 // }
 
 // 7-60. Working with Ajax & JSON ============================
-document.getElementById('button1').addEventListener('click', loadCustomer);
+// document.getElementById('button1').addEventListener('click', loadCustomer);
 
-document.getElementById('button2').addEventListener('click', loadCustomers);
+// document.getElementById('button2').addEventListener('click', loadCustomers);
 
-// Load single customers
-function loadCustomer(e){
-    const xhr = new XMLHttpRequest();
+// // Load single customers
+// function loadCustomer(e){
+//     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'customer.json', true);
+//     xhr.open('GET', 'customer.json', true);
 
-    xhr.onload = function(){
-        if(this.status === 200){
-            // console.log(this.responseText);
+//     xhr.onload = function(){
+//         if(this.status === 200){
+//             // console.log(this.responseText);
             
-            const customer = JSON.parse(this.responseText); // string. customer I.D나 name을 받을 수 없으므로 JSON으로 parse.
+//             const customer = JSON.parse(this.responseText); // string. customer I.D나 name을 받을 수 없으므로 JSON으로 parse.
         
-            const output = `
-            <ul>
-                <li>ID : ${customer.id}</li>
-                <li>Name : ${customer.name}</li>
-                <li>Company : ${customer.company}</li>
-                <li>Phone : ${customer.phone}</li>
-            </ul>`;
+//             const output = `
+//             <ul>
+//                 <li>ID : ${customer.id}</li>
+//                 <li>Name : ${customer.name}</li>
+//                 <li>Company : ${customer.company}</li>
+//                 <li>Phone : ${customer.phone}</li>
+//             </ul>`;
 
-            // want to put it into browser
-            document.getElementById('customer').innerHTML = output;
+//             // want to put it into browser
+//             document.getElementById('customer').innerHTML = output;
 
-        }
-    }
+//         }
+//     }
 
-    xhr.send();
-}
+//     xhr.send();
+// }
 
-// Load customers 
-function loadCustomers(e){
+// // Load customers 
+// function loadCustomers(e){
+//     const xhr = new XMLHttpRequest();
+
+//     xhr.open('GET', 'customers.json', true);
+
+//     xhr.onload = function(){
+//         if(this.status === 200){
+//             // console.log(this.responseText);
+            
+//             const customers = JSON.parse(this.responseText); // string. customer I.D나 name을 받을 수 없으므로 JSON으로 parse.
+            
+//             let output = '';
+
+//             customers.forEach(function(customer){
+//             output += `
+//             <ul>
+//                 <li>ID : ${customer.id}</li>
+//                 <li>Name : ${customer.name}</li>
+//                 <li>Company : ${customer.company}</li>
+//                 <li>Phone : ${customer.phone}</li>
+//             </ul>`;                
+//             });
+            
+
+//             // want to put it into browser
+//             document.getElementById('customers').innerHTML = output;
+
+//         }
+//     }
+
+//     xhr.send();
+// }
+
+// 7-61. Data From Ajax (External API)
+
+// Get from API -------------------------------------------------------
+document.querySelector('.get-jokes').addEventListener('click', getJokes);
+
+function getJokes(e){
+   const number = document.querySelector('input[type = "number"]').value;
+   
+   console.log(number);
+
+    // create object
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'customers.json', true);
+    xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+    
+    xhr.onload = function() {
+        if(this.status === 200) { // this means xhr object
+            const response = JSON.parse(this.responseText); // JSON string을 object로 바꾸고 싶음. ('.' )
+            // putting it inside of dorm ----------------------------------------
 
-    xhr.onload = function(){
-        if(this.status === 200){
-            // console.log(this.responseText);
-            
-            const customers = JSON.parse(this.responseText); // string. customer I.D나 name을 받을 수 없으므로 JSON으로 parse.
-            
             let output = '';
 
-            customers.forEach(function(customer){
-            output += `
-            <ul>
-                <li>ID : ${customer.id}</li>
-                <li>Name : ${customer.name}</li>
-                <li>Company : ${customer.company}</li>
-                <li>Phone : ${customer.phone}</li>
-            </ul>`;                
-            });
-            
+            if (response.type === 'success'){
+                response.value.forEach(function(joke){ // +value -> '.'resposne is object. has type & value.
+                    output += `<li>${joke.joke}</li>`;
+                }) 
+            } else {
+                output += '<li>Something went wrong</li>';
+            }
 
-            // want to put it into browser
-            document.getElementById('customers').innerHTML = output;
-
+            document.querySelector('.jokes').innerHTML = output;
         }
     }
 
+
     xhr.send();
+    // to prevent default behavior 
+    e.preventDefault();
+
 }
+
+// 62 : REST APIs & HTTP request ====================================
+
+// API: messenger 
+// rest : use HTTP request to format that message
+
+// HTTP Request
+
+// GET: data를 회수함. from specified resource
+// POST : submit data
+// Put : Update specified resource
+// DELETE: delete.value
+
+// HEAD : get이랑 비슷하지만, not return body
+// OPTIONS : supported HTTP methods를 return.
+// PATCH : Update partial resources. put이랑 비슷하지만 main에 focus슷
+
+// API Endpoints ----------------------
+// GET : https://someurl.com/api/users  -> Get all users
+//       http://someurl.com/api/users/1 -> Get single user
+// POST : http://someurl.com/api/users  -> Add user
+// PUT : http://someurl.com/api/users/1 -> Update user
+// DELETE : http://someurl.com/api/users/1 -> Delete user
+
+// 63. Callback Functions ==============================
+
