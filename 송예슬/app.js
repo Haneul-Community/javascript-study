@@ -1,488 +1,272 @@
-// 3-23 Document Object =============================================
-// let val;
-
-// val = document;
-// val = document.all;
-// val = document.all[2];
-// val = document.all.length;
-// val = document.head;
-// val = document.body;
-// val = document.doctype;
-// val = document.URL;
-// val = document.characterSet;
-// val = document.contentType;
-
-// val = document.forms;
-// val = document.forms[0];
-// val = document.forms[0].id;
-// val = document.forms[0].method;
-// val = document.forms[0].action;
-
-// val = document.links;
-// val = document.links[0];
-// val = document.links[0].id;
-// val = document.links[0].className;
-// val = document.links[0].classList[0];
-
-// val = document.images;
-
-// console.log(val);
-
-// 3-24, Dom selectors for single element ====================================
-
-//document.getElementById()
-// console.log(document.getElementById('task-title'));
-
-// Get things from the element
-// console.log(document.getElementById('task-title').id);
-// console.log(document.getElementById('task-title').className);
-
-// const taskTitle = document.getElementById('task-title');
-
-//Change styling
-// taskTitle.style.background = '#333';
-// taskTitle.style.color = '#fff';
-// taskTitle.style.padding = '5px';
-// taskTitle.style.display = 'none';
-
-// Change content
-// taskTitle.textContent = 'Task List';
-// taskTitle.innerText = 'My Tasks';
-// taskTitle.innerHTML = '<span style = "color:red"> Task List </span>';
-
-// document.querySelector()
-
-// console.log(document.querySelector('#task-title'));
-// console.log(document.querySelector('.card-title'));
-// console.log(document.querySelector('h5'));
-
-// document.querySelector('li').style.color = 'red';
-// document.querySelector('ul li').style.color = 'blue';
-
-// document.querySelector('li:last-child').style.color = 'red';
-// document.querySelector('li:nth-child(3)').style.color = 'yellow';
-// document.querySelector('li:nth-child(4)').textContent = 'Hello World';
-// document.querySelector('li:nth-child(even)').style.background = '#ccc'; // even 중 젤 첫번째꺼만 적용됨
-// document.querySelector('li:nth-child(odd)').style.background = '#f4f4f4'; // odd 중 젤 첫번째꺼만 됨.
-
-// 3-25 : Dom Selectors for Multiple element ===========================
-
-// document.getElementsMyClassName ------------------------
-
-// const items = document.getElementsByClassName('collection-item');
-// console.log(items);
-// console.log(items[0]);
-// items[0].style.color = 'red';
-// items[3].textContent = 'Hello';
-
-// const listItems = document.querySelector('ul').getElementsByClassName('collection-item');
-
-// console.log(listItems);
-
-//document.getElementsByTagName : 위와 같은 역할.. ----------------
-//  let lis = document.getElementsByTagName('li');
-//  console.log(lis);
-//  console.log(lis[0]);
-//  lis[0].style.color = 'red';
-//  lis[3].textContent = 'Hello';
-
-// Conver HTML Collection into array -------------------
-// lis = Array.from(lis);
-
-// lis.reverse();
-
-// // 각각 요소에 대해.
-// lis.forEach(function(li,index){
-//     console.log(li.className);
-//     li.textContent = `${index} : Hello` ;
-// });
-
-// console.log(lis);
-
-// document.querySelectorAll ------------------
-// const items = document.querySelectorAll('ul.collection li.collection-item');
-
-// items.forEach(function(item, index){
-//     item.textContent = `${index}: Hello`;
-// });
-
-// // 홀,짝에 해당되는 모두 변경 가능.
-// const liOdd = document.querySelectorAll('li:nth-child(odd)');
-// const liEven = document.querySelectorAll('li:nth-child(even)');
-
-// liOdd.forEach(function(li,index){
-//     li.style.background = '#ccc';
-// });
-
-// for(let i=0; i<liEven.length; i++){
-//     liEven[i].style.background = '#f4f4f4';
-// }
-
-// console.log(items);
-
-// 3-26. Traversing DOM ======================================
-
-// let val;
-
-// const list = document.querySelector('ul.collection');
-// const listItem = document.querySelector('li.collection-item:first-child');
-
-// val = listItem;
-// val = list;
-
-// //Get child nodes 
-// val = list.childNodes;
-// val = list.childNodes[0];
-// val = list.childNodes[0].nodeName;
-// val = list.childNodes[1].nodeType;
-
-// // nodeType number means
-// // 1 : Element
-// // 2 : Attribute 
-// // 3 : Text node
-// // 8 : Comment
-// // 9 : Document itself
-// // 10 : Doctype
-
-// //Get children element nodes
-// val = list.children;
-// val = list.children[1];
-// list.children[1].textContent = 'Hello';
-// //Children of children
-// list.children[3].children[0].ud = 'test-link';
-// val = list.children[3].children[0];
-
-// // First child
-// val = list.firstChild;
-// val = list.firstElementChild;
-
-// // Last child
-// val = list.lastChild;
-// val = list.lastElementChild;
-
-// //Count child elements
-// val = list.childElementCount;
-
-// // Get parent node
-// val = listItem.parentNode;
-// val = listItem.parentElement;
-// val = listItem.parentElement.parentElement;
-
-// // Get next sibling
-// val = listItem.nextSibling;
-// val = listItem.nextElementSibling.nextElementSibling.previousElementSibling;
-
-// // Get prev sibling
-// val = listItem.previousSibling;
-// val = listItem.previousElementSibling;
-// console.log(val);
-
-// 3-27, Creating Elements =================================
-
-// Create element
-// const li = document.createElement('li');
-
-// // Add class
-// li.className = 'collection-item';
-
-// // Add id
-// li.id = 'new-item';
-
-// // Add attribute
-// li.setAttribute('title', 'New Item');
-
-// // Create text node and append
-// li.appendChild(document.createTextNode('Hello world'));
-
-// // Create new link element
-// const link = document.createElement('a');
-// // Add classes
-// link.className = 'delete-item secondary-content';
-// // Add icon html
-// link.innerHTML = '<i class="fa fa-remove"></i>';
-
-// // Append link into li
-// li.appendChild(link);
-
-// //Append li as child to ul
-// document.querySelector('ul.collection').appendChild(li);
-
-// console.log(li);
-
-// 3-28, Removing & Replacing Elements =========================
-
-// REPLACE ELEMENT ---------------------------------------
-
-// // Create Element
-// const newHeading = document.createElement('h2');
-// // Add id
-// newHeading.id = 'task-title';
-// // New text node
-// newHeading.appendChild(document.createTextNode('Task List'));
-
-// // Get the old heading
-// const oldHeading = document.getElementById('task-title');
-// //Parent
-// const cardAction = document.querySelector('.card-action');
-
-// // Replace
-// cardAction.replaceChild(newHeading, oldHeading);
-
-// // REMOVE ELEMENT ------------------------
-// const lis = document.querySelectorAll('li');
-// const list = document.querySelector('ul');
-
-// // Remove list item
-// lis[0].remove();
-
-// //Remove child element
-// list.removeChild(lis[3]);
-
-// // CLASSES & ATTR ----------------------------
-// const firstLi = document.querySelector('li:first-child');
-// const link = firstLi.children[0];
-
-// let val;
-
-// // Classes
-// val = link.className;
-// val = link.classList;
-// val = link.classList[0]
-// link.classList.add('test');
-// link.classList.remove('test');
-// val = link;
-
-// // Attributes
-// val = link.getAttribute('href');
-// val = link.setAttribute('href', 'http://google.com');
-// link.setAttribute('title', 'Google');
-// link.removeAttribute('title');
-// val = link;
-
-// console.log(val);
-
-// 3-29 Event Listeners & Event Object? ==========================
-
-// doocument.querySelector('.clear-tasks').addEventListener('click', function(e){
-//     console.log('Hello world');
-
-//     e.preventDefault();
-// });
-
-// 위와 같은 결과
-// document.querySelector('.clear-tasks').addEventListener('click', onClick);
-
-// function onClick(e){
-//     //console.log('Clicked');
-
-//     let val;
-
-//     val = e;
-
-//     // Event tartget element
-//     val = e.target;
-//     val = e.target.id;
-//     val = e.target.className;
-//     val = e.target.classList;
-
-//    // e.target.innerText = 'Hello';
-
-//    // Event type
-//    val = e.type;
-
-//    //Timestamp
-//    val = e.timeStamp;
-
-//    // Coords event relative to the window : 해당 위치.
-//    val = e.clientY;
-//    val = e.clientX;
-
-//     console.log(val);
-// }
-
-// 3-30 Mouse Event ========================================
-
-// const clearBtn = document.querySelector('.clear-tasks');
-// const card = document.querySelector('.card');
-// const heading = document.querySelector('h5');
-
-//Click
-// clearBtn.addEventListener('click', runEvent);
-// //Doubleclick
-// clearBtn.addEventListener('dbclick', runEvent);
-// // Mousedown
-// clearBtn.addEventListener('mousedown', runEvent);
-// // Mouseup
-// clearBtn.addEventListener('mouseup', runEvent);
-// //Mouseenter
-// card.addEventListener('mouseenter', runEvent);
-// //Mouseleave
-// card.addEventListener('mouseleave', runEvent);
-// // Mouseover : 주변?까지
-// card.addEventListener('mouseover', runEvent);
-// // Mouseout : 주변?까지
-// card.addEventListener('mouseout', runEvent);
-// Mousemove
-// card.addEventListener('mousemove', runEvent);
-
-// // Event Handler
-// function runEvent(e){
-//     console.log(`EVENT TYPE : : ${e.type}`);
-
-// 마우스 커서에 따른 배경색 변경
-//     heading.textContent = `MouseX: ${e.offsetX} MouseY : ${e.offsetY}`;
-
-//     document.body.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 40)`;
-// }
-
-// 3-31 Keyboard & Input Events ================================
-const form = document.querySelector('form');
-const taskInput = document.getElementById('task');
-const heading = document.querySelector('h5');
-const select = document.querySelector('select');
-
-// Clear input
-taskInput.value = '';
-
-// form.addEventListener('submit', runEvent);
-
-// Keydown : 하나하나 칠때마다.
-// taskInput.addEventListener('keydown', runEvent);
-// Keyup : 끝까지 치고 나서. 
-//taskInput.addEventListener('keyup', runEvent);
-// Keypress : 키를 누를 때 마다
-//taskInput.addEventListener('keypress', runEvent);
-// Focus : 입력창에 마우스로 클릭하면.
-// taskInput.addEventListener('focus', runEvent);
-// Blur : 입력창에 마우스를 클릭햇다가, 다른곳을 클릭하면
-// taskInput.addEventListener('blur', runEvent);
-// Cut : 입력창에서 잘라내기
-// taskInput.addEventListener('cut', runEvent);
-// Paste : 입력창에 붙여놓기
-// taskInput.addEventListener('paste', runEvent);
-// Input : 입력창에 input을 받을 때.
-// taskInput.addEventListener('input', runEvent);
-// Change : 변경을 완료할때 마다.
-// select.addEventListener('change', runEvent);
-
-// function runEvent(e){
-//     console.log(`EVENT TYPE: ${e.type}`);
-
-   // console.log(e.target.value);
-
-    // heading.innerTet = e.target.value;
-    // Get input value
-    //console.log(taskInput.value);
-
-   //e.preventDefault();
-// }
-
-// 3-32 Event Bubbling & Delegation ================================
-
-// EVENT BUBBLING : 직접적으로 해당되는걸 클릭하지 않았는데도 발생. 
-
-// document.querySelector('.card-title').addEventListener('click', function(){
-//     console.log('card title');
-// });
-
-// document.querySelector('.card-content').addEventListener('click', function(){
-//     console.log('card content');
-// });
-
-// document.querySelector('.card').addEventListener('click', function(){
-//     console.log('card');
-// });
-
-// document.querySelector('.col').addEventListener('click', function(){
-//     console.log('col');
-// });
-
-// EVNET DELGATION
-
-// const delItem = document.querySelector('.delete-item');
-// delItem.addEventListener('click', deleteItem);
-// function deleteItem(){
-//     console.log('delete item');
-// }
-// 위의 경우에는 첫번째꺼만 됨. 
-
-document.body.addEventListener('click', deleteItem);
-
-// function deleteItem(e){
-//     if (e.target.parentElement.className === 'delete-item secondary-content'){
-//         console.log('delete item');
+// SECTION 5 : Object Oriented Javascript - ES5 & ES2015
+// 44: Constructors & 'this' keyworld ============================
+
+//Person constructor : 하나보단 여러개로 정의할 때
+// function Person(name,dob){
+//     this.name = name;
+//     // this.age = age;
+//     this.birthday = new Date(dob);
+//     this.calculateAge = function(){
+//         const diff = Date.now() - this.birthday.getTime();
+//         const ageDate = new Date(diff);
+//         return Math.abs(ageDate.getUTCFullYear() - 1970);
 //     }
 // }
-//  위의 경우에는 모두 다 됨. but className이 완전히 일치해야만 작동. 
 
-function deleteItem(e){
-         if (e.target.parentElement.classList.contains('delete-item')){
-             console.log('delete item');
-             e.target.parentElement.parentElement.remove(); // 실제로 UI에서 지워짐. 
-         }
-     }
+// const brad = new Person('Brad', 30);
+// const john = new Person('John', 32);
 
-// 이 경우는 저 말만 포함이 되기만 하면 작동. => to target 하기 가장 좋은 방법.
+// console.log(john.age);
 
-// 3-33 'Local & Session Storage ===========================================
+// const brad = new Person('Brad', '9-10-1981');
+// console.log(brad.calculateAge());
 
-// 저장한 것들을 JSON String Afie로 바꿔야함. 그리고 꺼내 쓸때는 Jason method를 거쳐야.
-// store local storage on set item & store key name and a value
+// 5-45 Built in Constructors
 
-// set local storage item
-// localStorage.setItem('name', 'John');
-// localStorage.setItem('age', '20');
-// browser을 껏다 켜도 저장되있음
+// //String
+// const name1 = 'Jeff';
+// const name2 = new String('Jeff'); // 객체로. 
 
-// set session storage item 
-// sessionStorage.setItem('name','Beth');
-// browser을 껏다키면 reset됨. <-> local. 
+// //name2.foo = 'bar'; // 객체에 속성 추가 가능.
+// // console.log(name2);
 
-// remove from storage
-//localStorage.removeItem('name');
+// console.log(typeof name2); // object
 
-// get from storage
-// const name = localStorage.getItem('name');
-// const age = localStorage.getItem('age');
+// // => 조건을 쓸때 ===는 안되지만, ==는 됨.
+// if(name2 === 'Jeff'){
+//     console.log('YES');
+// } else {
+//     console.log('NO');
+// }
 
-// clear local storage all
-// localStorage.clear();
+// // Number ----------------
+// const num1 = 5;
+// const num2 = new Number(5); // object. not number.
 
-// console.log(name, age);
+// // Boolean ---------------
+// const bool1 = true;
+// const bool2 = new Boolean(true);
 
+// // Function -----------------
+// const getSum1 = function(x,y){
+//     return x + y ;
+// }
 
-// document.querySelector('form').addEventListener('submit', function(e){
-//     const task = document.getElementById('task').value;
-//     localStorage.setItem('task', task);
-//     alert('Task saved');
+// const getSum2 = new Function('x','y', 'return 1+1'); // 3rd : function body
 
-//     e.preventDefault();
-// })
+// // 뭐가 달라서 설명한건지? 어쩌라는건지 모르겠음.
 
-// 위 경우, 하나의 값만 저장함. 다른 값을 저장하면 replace됨. ->sol) array로 만든후 string으로 저장.
+// //Object ---- : 딱히 다른거 x
+// const john1 = {name : "John"};
+// const john2 = new Object({name : "John"});
+// console.log(john2);
 
-document.querySelector('form').addEventListener('submit', function(e){
-    const task = document.getElementById('task').value;
+// // Arrays ---- : 딱히 다른거 x
+// const arr1 = [1,2,3,4];
+// const arr2 = new Array(1,2,3,4);
 
-    let tasks;
+// // Regular Expressions
+// const re1 = /\w+/;
+// const re2 = new RegExp('\\w+'); // 같은 결과가 나오려면 표현이 좀 다름.
 
-    if(localStorage.getItem('tasks') === null ){
-        tasks = [];
-    } else {
-        tasks = JSON.parse(localStorage.getItem('tasks')); 
-        // '.' str이 될 것이므로, JSON이나 우리가 쓸수있는 object로 바꿔야함.
-    }
+// console.log(re2);
 
-    tasks.push(task);
+// 5-46 Prototypes =======================================
 
-    localStorage.setItem('tasks', JSON.stringify(tasks)); // string으로 보내져야 하므로.
-    alert('Task saved');
+// Object.prototype
+// Person.prototype
 
-    e.preventDefault(); 
-});
+// Person constructor
+// function Person(firstName,lastName,dob){
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//     this.birthday = new Date(dob);
+//     this.calculateAge = function(){
+//         const diff = Date.now() - this.birthday.getTime();
+//         const ageDate = new Date(diff);
+//         return Math.abs(ageDate.getUTCFullYear() - 1970);
+//     }
+// }
 
-const tasks = JSON.parse(localStorage.getItem('tasks'));
+// // Calculate age (어떤 사람이든 다 똑같이 들어가므로 prototype으로 뺄 것임)
+// Person.prototype.calculateAge = function(){
+//     const diff = Date.now() - this.birthday.getTime();
+//     const ageDate = new Date(diff);
+//     return Math.abs(ageDate.getUTCFullYear() - 1970);
+// }
 
-tasks.forEach(function(task){
-    console.log(task);
-});
+// // Get full name
+// Person.prototype.getFullName = function(){
+//     return `${this.firstName} ${this.lastName}`;
+// }
+
+// // Gets Married
+// Person.prototype.getsMaried = function(newLastName){
+//     this.lastName = newLastName;
+// }
+
+// const john = new Person('John', 'Doe', '8-12-90');
+// const mary = new Person('Mary', 'Johnson', 'March 20 1978');
+
+// console.log(mary);
+
+// console.log(john.calculateAge()); // constructor에 있는 것처럼 동작. 
+
+// console.log(mary.getFullName()); 
+
+// mary.getsMaried('Smith');
+
+// console.log(mary.getFullName());
+// // prototype function을 정의함으로써 constructor가 넘치지 않게. 
+
+// console.log(mary.hasOwnProperty('firstName')); // true
+// console.log(mary.hasOwnProperty('getFullName')); // false. cause prototype is not property. 
+
+// 5-47, Prototypal Ingeritance =============================
+
+//Person constructor
+// function Person(firstName, lastName){
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+// }
+
+// // Greeting
+// Person.prototype.greeting = function(){
+//     return `Hello there ${this.firstName} ${this.lastName}`; 
+// }
+
+// const person1 = new Person('John', 'Doe');
+
+// // console.log(person1.greeting());
+
+// //Customer constructor
+// function Customer(firstName, lastName, phone, membership){
+//     Person.call(this, firstName, lastName);
+// // QQQQQQQQQQQQQQQ : 왜 처음 인자로 this를 받는지.
+
+//     this.phone = phone;
+//     this.membership = membership;
+// }
+
+// // Inherit Person prototype methos
+// Customer.prototype = Object.create(Person.prototype);
+// // Inherit하지 않으면 다른 constructer의 prototype 사용불가. 
+
+// // Make customer.protoype return Customer()
+// Customer.prototype.constructor = Customer;
+// // for using customer constructor. QQQQQQQQQ. 이렇게 안쓰면 덧남?
+
+// // Create customer
+// const customer1 = new Customer('Tom', 'Smith', '555-555-5555', 'Standard');
+
+// // Customer greeting
+// Customer.prototype.greeting = function(){
+//     return `Hello there ${this.firstName} ${this.lastName}
+//     wel come to our company`; 
+// }
+
+// console.log(customer1);
+// console.log(customer1.greeting());
+
+// 5-48. Using Object.creat =============================================
+// const personPrototypes = {
+//     greeting : function(){
+//         return `Hello there ${this.firstName} ${this.lastName}`;
+//     },
+//     getsMarried: function(newLastName){
+//         this.lastName = newLastName;
+//     }
+// }
+
+// const mary = Object.create(personPrototypes);
+// mary.firstName = 'Mary';
+// mary.lastName = 'Williams';
+// mary.age = 30;
+
+// mary.getsMarried('Thompson')
+
+// console.log(mary);
+
+// const brad = Object.create(personPrototypes, {
+//     firstName : {value:'Brad'},
+//     lastName: {value: 'Traversy'},
+//     age : {value: 36}
+// });
+
+// console.log(brad);
+// console.log(brad.greeting());
+
+// 5-49.ES6 Classes ================================
+
+// class Person {
+//     constructor(firstName, lastName, dob){
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//         this.birthday = new Date(dob);
+//     }
+
+//     greeting(){
+//         return `Hello there ${this.firstName} ${this.lastName}`;
+//     }
+//     // class 안에 추가한 method -> prototype에 추가됨. 
+
+//     calculateAge(){
+//         const diff = Date.now() - this.birthday.getTime();
+//         const ageDate = new Date(diff);
+//         return Math.abs(ageDate.getIUTCFullYear() - 1970);
+//     }
+
+//     getsMarried(newLastName){
+//         this.lastName = newLastName;
+//     }
+
+//     static addNumbers(x,y){
+//         return x+y;
+//     }
+// }
+
+// const mary = new Person('Mary', 'Williams', '11-13-1980');
+
+// mary.getsMarried('Thompson');
+
+// console.log(mary);
+// // console.log(mary.addNumbers(1,2)); // error -> ',' addNumbers != func. it's static method.
+// console.log(Person.addNumbers(1,2)); // to use static method, use actual class name. 
+
+// static method : object를 설명?선언?없이 쓸 수 있음. 
+
+// 5-50. Sub Classes ==================================
+// inheritance in 6 classes = subclasses
+
+// class Person{
+//     constructor(firstName, lastName){
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//     }
+
+//     greeting(){
+//         return `Hello there ${this.firstName} ${this.lastName}`;  
+//     }
+// }
+
+// // extend class . customer is subclass of Person.
+// class Customer extends Person{
+//     constructor(firstName, lastName, phone, membership){
+//         super(firstName, lastName); // to call from PEerson. parent class constructor
+        
+//         this.phone = phone;
+//         this.membership = membership;
+//     }
+    
+//     static getMembershipCost(){
+//         return 500;
+//     }
+// }
+
+// const john = new Customer('John', 'Doe', '555-555-5555', 'Standard');
+
+// console.log(john);
+// console.log(john.greeting()); // extend했으므로 customer class에 greeting 함수가 없어도 사용 가능. 
+
+// console.log(Customer.getMembershipCost(); // customer 자체의 함수 생성 가능
+// // console.log(Person.getMembershipCost());// error : person -> customer (0) but customer -> person (X)
