@@ -132,43 +132,43 @@
 // 7-61. Data From Ajax (External API)
 
 // Get from API -------------------------------------------------------
-document.querySelector('.get-jokes').addEventListener('click', getJokes);
+// document.querySelector('.get-jokes').addEventListener('click', getJokes);
 
-function getJokes(e){
-   const number = document.querySelector('input[type = "number"]').value;
+// function getJokes(e){
+//    const number = document.querySelector('input[type = "number"]').value;
    
-   console.log(number);
+//    console.log(number);
 
-    // create object
-    const xhr = new XMLHttpRequest();
+//     // create object
+//     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+//     xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
     
-    xhr.onload = function() {
-        if(this.status === 200) { // this means xhr object
-            const response = JSON.parse(this.responseText); // JSON string을 object로 바꾸고 싶음. ('.' )
-            // putting it inside of dorm ----------------------------------------
+//     xhr.onload = function() {
+//         if(this.status === 200) { // this means xhr object
+//             const response = JSON.parse(this.responseText); // JSON string을 object로 바꾸고 싶음. ('.' )
+//             // putting it inside of dorm ----------------------------------------
 
-            let output = '';
+//             let output = '';
 
-            if (response.type === 'success'){
-                response.value.forEach(function(joke){ // +value -> '.'resposne is object. has type & value.
-                    output += `<li>${joke.joke}</li>`;
-                }) 
-            } else {
-                output += '<li>Something went wrong</li>';
-            }
+//             if (response.type === 'success'){
+//                 response.value.forEach(function(joke){ // +value -> '.'resposne is object. has type & value.
+//                     output += `<li>${joke.joke}</li>`;
+//                 }) 
+//             } else {
+//                 output += '<li>Something went wrong</li>';
+//             }
 
-            document.querySelector('.jokes').innerHTML = output;
-        }
-    }
+//             document.querySelector('.jokes').innerHTML = output;
+//         }
+//     }
 
 
-    xhr.send();
-    // to prevent default behavior 
-    e.preventDefault();
+//     xhr.send();
+//     // to prevent default behavior 
+//     e.preventDefault();
 
-}
+// }
 
 // 62 : REST APIs & HTTP request ====================================
 
@@ -193,5 +193,113 @@ function getJokes(e){
 // PUT : http://someurl.com/api/users/1 -> Update user
 // DELETE : http://someurl.com/api/users/1 -> Delete user
 
-// 63. Callback Functions ==============================
+// 63. Callback Functions ============================== 함수안에서 함수를 부르는.
 
+// const posts = [
+//     {title : 'Post One', body: 'This is post one'}, 
+//     {title : 'Post Two', body: 'This is post two'}, 
+// ];
+
+// // synchronous -------------------------- 동시발생
+// function createPost(post){
+//     setTimeout(function(){
+//         posts.push(post);
+//     }, 2000);    // 2 seconds
+// }
+
+// function getPosts(){
+//     setTimeout(function(){
+//         let output = '';
+//         posts.forEach(function(post){
+//             output += `<li>${post.title}</li>`;
+//         })생
+//         document.body.innerHTML = output;
+//     },1000); // 1seconds
+// }
+
+// // create post & get post after that. 
+// createPost({title: "Post Three", body : 'This is post three'});
+
+// getPosts();
+// ==> 만들어지는 동안 get해버려서 2개만 post. 
+
+// asynchronous -------------------- 한개씩 발생
+
+// function createPost(post, callback){
+//     setTimeout(function(){
+//         posts.push(post);
+//         callback();  // 추가된 부분. call getPosts를 여기에.
+//     }, 2000);    // 2 seconds
+// }
+
+// function getPosts(){
+//     setTimeout(function(){
+//         let output = '';
+//         posts.forEach(function(post){
+//             output += `<li>${post.title}</li>`;
+//         });
+//         document.body.innerHTML = output;
+//     },1000); // 1seconds
+// }
+
+// createPost({title: "Post Three", body : 'This is post three'}, getPosts);
+
+// 7-64. Custom HTTP Library
+
+const http = new easyHTTP;
+
+// // Get Posts
+// http.get('https://jsonplaceholder.typicode.com/posts', 
+//     function(err, posts) {
+// if(err){
+//     console.log(err);
+// } else {
+//     console.log(posts);
+// }
+
+//     });
+
+// // Get Single post 
+// http.get('https://jsonplaceholder.typicode.com/posts/1', 
+//     function(err, posts) {
+// if(err){
+//     console.log(err);
+// } else {
+//     console.log(posts);
+// }
+
+//     });
+
+// Creat Data
+const data = {
+    title : 'Custom Post',
+    body : 'This is a custom post'
+};
+
+//Create Post
+http.post('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
+    if(err){
+        console.log(err);
+    } else {
+        console.log(post);
+    }
+});
+
+// Update Post : 왜 계속 에러나는지 모르겠음. 
+http.put('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
+            if(err){
+                console.log(err);
+            } else {
+                console.log(post);
+            }
+    });
+
+// Delete Post
+http.delete('https://jsonplaceholder.typicode.com/posts/1', 
+    function(err, response) {
+        if(err){
+        console.log(err);
+    } else {
+        console.log(response);
+    }
+});  
