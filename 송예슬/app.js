@@ -344,61 +344,187 @@
 // });
 
 // 7-67, Fetch API
-document.getElementById('button1').addEventListener('click', getText);
+// document.getElementById('button1').addEventListener('click', getText);
 
-document.getElementById('button2').addEventListener('click', getJson);
+// document.getElementById('button2').addEventListener('click', getJson);
 
-document.getElementById('button3').addEventListener('click', getExternal);
+// document.getElementById('button3').addEventListener('click', getExternal);
 
-// Get local text file data
-function getText(){
-    fetch('test.txt')
-        .then(function(res){
-            return res.text();
-        })
-        .then(function(data) {
-            console.log(data);
-            document.getElementById('output').innerHTML = data;
-        })
-        .catch(function(err){
-            console.log(err);
-        });
+// // Get local text file data
+// function getText(){
+//     fetch('test.txt')
+//         .then(function(res){
+//             return res.text();
+//         })
+//         .then(function(data) {
+//             console.log(data);
+//             document.getElementById('output').innerHTML = data;
+//         })
+//         .catch(function(err){
+//             console.log(err);
+//         });
+// }
+
+// // Get local json data
+// function getJson(){
+//     fetch('poth.json')
+//         .then(function(res){
+//             return res.json();
+//         })
+//         .then(function(data) {
+//             console.log(data);
+//             let output = '';
+//             data.forEach(function(post) {
+//                 output += `<li>${post.title}</li>`;
+//             });
+//             document.getElementById('output').innerHTML = output;
+//         })
+//         .catch(function(err){
+//             console.log(err);
+//         });
+// }
+
+// // Get from external API
+// function getExternal(){
+//     fetch('https://api.github.com/users')
+//         .then(function(res){
+//             return res.json();
+//         })
+//         .then(function(data) {
+//             console.log(data);
+//             let output = '';
+//             data.forEach(function(user) {
+//                 output += `<li>${user.login}</li>`;
+//             });
+//             document.getElementById('output').innerHTML = output;
+//         })
+//         .catch(function(err){
+//             console.log(err);
+//         });
+// }
+
+// 7-69 Arrow Functions ==========================================
+
+// const sayHello = function(){
+//     console.log('Hello');
+// }
+
+// const sayHello = () => {
+//     console.log('Hello');
+// }
+
+// One line function does not need braces 
+// const sayHello = () => console.log('Hello');
+
+// One line returns
+// const sayHello = () => 'Hello';
+
+// Same as above
+// const sayHello = function() {
+//     return 'Hello';
+// }
+
+// Return object
+// const sayHello = () => ({msg : 'Hello'}); // => body. 
+
+// Single param does not need parenthesis
+// const sayHello = name => console.log(`Hello ${name}`);
+
+// Multiple arams need parenthesis_()
+// const sayHello = (firstName, lastName) => console.log(`Hello ${firstName} ${lastName}`);
+
+// sayHello('Brad', 'Traversy');
+
+// const users = ['Nathan', 'John', 'William'];
+
+// const nameLengths = users.map(function(name) {
+//     return name.length;
+// });
+
+// Shorter
+// const nameLengths = users.map((name) => {
+    // return name.length;
+// });
+
+// Shortest
+// const nameLengths = users.map(name => name.length);
+
+// console.log(nameLengths);
+
+// Fetch API using allow function --------------------------------
+// document.getElementById('button1').addEventListener('click', getText);
+
+// document.getElementById('button2').addEventListener('click', getJson);
+
+// document.getElementById('button3').addEventListener('click', getExternal);
+
+// // Get local text file data
+// function getText(){
+//     fetch('test.txt')
+//         .then(res => res.text())
+//         .then(data => {
+//             console.log(data);
+//             document.getElementById('output').innerHTML = data;
+//         })
+//         .catch(err => console.log(err));
+// }
+
+// // Get local json data
+// function getJson(){
+//     fetch('poth.json')
+//         .then(res => res.json())
+//         .then(data => {
+//             console.log(data);
+//             let output = '';
+//             data.forEach(function(post) {
+//                 output += `<li>${post.title}</li>`;
+//             });
+//             document.getElementById('output').innerHTML = output;
+//         })
+//         .catch(err => console.log(err));
+// }
+
+// // Get from external API
+// function getExternal(){
+//     fetch('https://api.github.com/users')
+//         .then(res =>res.json())
+//         .then(data => {
+//             console.log(data);
+//             let output = '';
+//             data.forEach(function(user) {
+//                 output += `<li>${user.login}</li>`;
+//             });
+//             document.getElementById('output').innerHTML = output;
+//         })
+//         .catch(err => console.log(err));
+// }
+
+// 7-70. Custom HTTP Library 
+const http = new EasyHTTP;
+
+// Get Users
+// http.get('https://jsonplaceholder.typicode.com/users')
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
+
+// User Data
+const data = {
+    name : 'John Doe',
+    username : 'johndoe',
+    email : 'jdoe@gmail.com'
 }
 
-// Get local json data
-function getJson(){
-    fetch('poth.json')
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(data) {
-            console.log(data);
-            let output = '';
-            data.forEach(function(post) {
-                output += `<li>${post.title}</li>`;
-            });
-            document.getElementById('output').innerHTML = output;
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-}
+// // Create User
+// http.post('https://jsonplaceholder.typicode.com/users', data)
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
 
-// Get from external API
-function getExternal(){
-    fetch('https://api.github.com/users')
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(data) {
-            console.log(data);
-            let output = '';
-            data.forEach(function(user) {
-                output += `<li>${user.login}</li>`;
-            });
-            document.getElementById('output').innerHTML = output;
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-}
+// Update Post
+http.put('https://jsonplaceholder.typicode.com/users/2', data)
+ .then(data => console.log(data))
+ .catch(err => console.log(err));
+
+ // Delete User
+http.delete('https://jsonplaceholder.typicode.com/users/2', data)
+ .then(data => console.log(data))
+ .catch(err => console.log(err));
