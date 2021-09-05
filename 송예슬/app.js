@@ -499,7 +499,72 @@
 //         .catch(err => console.log(err));
 // }
 
-// 7-70. Custom HTTP Library 
+// 7-70. Custom HTTP Library ==============================================
+// const http = new EasyHTTP;
+
+// Get Users
+// http.get('https://jsonplaceholder.typicode.com/users')
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
+
+// // User Data
+// const data = {
+//     name : 'John Doe',
+//     username : 'johndoe',
+//     email : 'jdoe@gmail.com'
+// }
+
+// // Create User
+// http.post('https://jsonplaceholder.typicode.com/users', data)
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
+
+// // Update Post
+// http.put('https://jsonplaceholder.typicode.com/users/2', data)
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
+
+//  // Delete User
+// http.delete('https://jsonplaceholder.typicode.com/users/2', data)
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
+
+// 7-71. Async & Await ===========================================
+// async function myfunc(){     // asyn을 추가함으로써 promise 를 return하게끔.
+//     const promise = new Promise( (resolve, reject) => {
+//         setTimeout( () => resolve('Hello'), 1000);
+//     });
+
+//     const error = true;
+
+//     if(!error){
+//         const res = await promise; // Wait until promise is resolved
+//         return res;
+//     } else {
+//         await Promise.reject(new Error('Something went wrong'));
+//     }
+// }
+
+// myfunc()
+//  .then(res => console.log(res))
+//  .catch(err => console.log(err));
+
+// Using FETCH - base case to use this async await.
+
+// async function getUsers(){
+//     // await response of the fetch call
+//     const response = await fetch
+//     ('https://jsonplaceholder.typicode.com/users');
+
+//     // Only proceed once its resolved
+//     const data = await response.json();
+//     // only proceed once second promise is resolved
+//     return data;
+// }
+
+// getUsers().then(users => console.log(users));
+
+// 7-72. Custom HTTP Library (Fetch with ...)
 const http = new EasyHTTP;
 
 // Get Users
@@ -519,12 +584,12 @@ const data = {
 //  .then(data => console.log(data))
 //  .catch(err => console.log(err));
 
-// Update Post
-http.put('https://jsonplaceholder.typicode.com/users/2', data)
- .then(data => console.log(data))
- .catch(err => console.log(err));
+// // Update Post
+// http.put('https://jsonplaceholder.typicode.com/users/2', data)
+//  .then(data => console.log(data))
+//  .catch(err => console.log(err));
 
- // Delete User
+//  // Delete User
 http.delete('https://jsonplaceholder.typicode.com/users/2', data)
  .then(data => console.log(data))
  .catch(err => console.log(err));
