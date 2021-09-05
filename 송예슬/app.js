@@ -244,9 +244,9 @@
 
 // createPost({title: "Post Three", body : 'This is post three'}, getPosts);
 
-// 7-64. Custom HTTP Library
+// 7-64,65 Custom HTTP Library ==========================================
 
-const http = new easyHTTP;
+// const http = new easyHTTP;
 
 // // Get Posts
 // http.get('https://jsonplaceholder.typicode.com/posts', 
@@ -270,36 +270,135 @@ const http = new easyHTTP;
 
 //     });
 
-// Creat Data
-const data = {
-    title : 'Custom Post',
-    body : 'This is a custom post'
-};
+// // Creat Data
+// const data = {
+//     title : 'Custom Post',
+//     body : 'This is a custom post'
+// };
 
-//Create Post
-http.post('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(post);
-    }
-});
+// //Create Post
+// http.post('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(post);
+//     }
+// });
 
-// Update Post : 왜 계속 에러나는지 모르겠음. 
-http.put('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
-            if(err){
-                console.log(err);
-            } else {
-                console.log(post);
-            }
-    });
+// // Update Post : 왜 계속 에러나는지 모르겠음. 
+// http.put('https://jsonplaceholder.typicode.com/posts', data, function(err,post){
+//             if(err){
+//                 console.log(err);
+//             } else {
+//                 console.log(post);
+//             }
+//     });
 
-// Delete Post
-http.delete('https://jsonplaceholder.typicode.com/posts/1', 
-    function(err, response) {
-        if(err){
-        console.log(err);
-    } else {
-        console.log(response);
-    }
-});  
+// // Delete Post
+// http.delete('https://jsonplaceholder.typicode.com/posts/1', 
+//     function(err, response) {
+//         if(err){
+//         console.log(err);
+//     } else {
+//         console.log(response);
+//     }
+// });  
+
+// 7-66, ES6 Promises ==================================================
+// const posts = [
+//     {title : 'Post One', body : 'This is post one'},
+//     {title: 'Post Two', body : 'This is post two'}
+// ];
+
+// function createPost(post){
+//     return new Promise(function(resolve, reject){ // resolve : 실행하거나 완료됬을 때 call하고 싶을 때, reject : throw하고싶은 error을 call하고 싶을 때. 
+//         setTimeout(function(){
+//             posts.push(post);
+
+//             const error = true;
+
+//             if(!error){
+//                 resolve();
+//             } else {
+//                 reject('Error : Something went wrong');
+//             }
+//             resolve();  // callback 
+//         }, 2000);
+//     });
+// }
+
+// function getPosts() {
+//     setTimeout(function(){
+//         let output = '';
+//         posts.forEach(function(post){
+//             output += `<li>${post.title}</li>`;
+//         });
+//         document.body.innerHTML = output;
+//     },1000);
+// }
+
+// createPost({title : 'Post Three', body : 'This is post three'})
+// .then(getPosts)
+// .catch(function(err){   // catch부분이 없으면 uncaught in promise. 
+//    console.log(err); 
+// });
+
+// 7-67, Fetch API
+document.getElementById('button1').addEventListener('click', getText);
+
+document.getElementById('button2').addEventListener('click', getJson);
+
+document.getElementById('button3').addEventListener('click', getExternal);
+
+// Get local text file data
+function getText(){
+    fetch('test.txt')
+        .then(function(res){
+            return res.text();
+        })
+        .then(function(data) {
+            console.log(data);
+            document.getElementById('output').innerHTML = data;
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+}
+
+// Get local json data
+function getJson(){
+    fetch('poth.json')
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            let output = '';
+            data.forEach(function(post) {
+                output += `<li>${post.title}</li>`;
+            });
+            document.getElementById('output').innerHTML = output;
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+}
+
+// Get from external API
+function getExternal(){
+    fetch('https://api.github.com/users')
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            let output = '';
+            data.forEach(function(user) {
+                output += `<li>${user.login}</li>`;
+            });
+            document.getElementById('output').innerHTML = output;
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+}
